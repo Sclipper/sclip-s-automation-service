@@ -1,0 +1,1 @@
+# sclip-s-automation-service
