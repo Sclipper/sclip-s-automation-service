@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  backend:
+    container_name: sclip-s-automation-service
+    env_file:
+      - /home/ubuntu/.env/thorn-api.env
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 8010:8010
