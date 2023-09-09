@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { orderWater } from './Email.Controller'
+import { orderWater } from './Email.controller'
 
 const router = Router()
 
