@@ -6,11 +6,20 @@
   "author": "Sclipper",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_PATH=src nodemon index.ts"
+    "start:dev": "NODE_ENV=dev NODE_PATH=src nodemon index.ts",
+    "start:prod": "NODE_ENV=prod NODE_PATH=src nodemon index.ts",
+    "migrate:dev": "npx dotenv -e .env.dev -- prisma migrate dev",
+    "db:push": "npx dotenv -e .env.dev -- prisma db push",
+    "migrate:reset": "npx dotenv -e .env.dev -- prisma migrate reset",
+    "db:seed": "npx dotenv -e .env.dev -- prisma db seed",
+    "prisma:generate": "npx dotenv -e .env.dev -- prisma generate",
+    "prisma:studio": "npx dotenv -e .env.dev -- prisma studio",
+    "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-typescript": "^7.17.12",
+    "@prisma/client": "5.2.0",
     "@sentry/node": "^7.8.1",
     "@sentry/tracing": "^7.8.1",
     "@types/bcrypt": "^5.0.0",
@@ -30,6 +39,7 @@
     "moment": "^2.29.3",
     "nodemailer": "^6.9.5",
     "nodemon": "^2.0.16",
+    "prisma": "^5.2.0",
     "ts-node": "^10.8.1"
   },
   "devDependencies": {

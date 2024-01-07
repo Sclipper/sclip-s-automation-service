@@ -1,7 +1,11 @@
 import { nodemailerEmail, nodemailerPass } from 'config/authorization'
+import { waterEmail } from 'config/emails'
 import { Request, Response } from 'express'
 import { asyncHandler } from 'middleware'
 import nodeMailer from 'nodemailer'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export const a = 23
 
@@ -17,7 +21,7 @@ export const orderWater = asyncHandler(async (req: Request, res: Response) => {
 
   const mailOptions = {
     from: nodemailerEmail,
-    to: 'mkopoi3@abv.bg',
+    to: waterEmail,
     subject: 'Sending Email using Node.js',
     text: `Здравей, 
 
@@ -35,8 +39,22 @@ export const orderWater = asyncHandler(async (req: Request, res: Response) => {
     if (error) {
       return res.status(500).json({ success: false, data: error })
     }
-    return res
-      .status(200)
-      .json({ success: true, data: 'Mail sent successfully' })
+
+    try {
+      // Add new row
+      prisma.waterOrder
+        .create({
+          data: {
+            amount: Number(amount),
+          },
+        })
+        .then(() => {
+          return res
+            .status(200)
+            .json({ success: true, data: 'Mail sent successfully' })
+        })
+    } catch (err) {
+      return res.status(500).json({ success: false, data: err })
+    }
   })
 })
