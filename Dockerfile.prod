@@ -6,4 +6,4 @@ COPY ./ ./
 
 RUN yarn
 
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["yarn", "start:prod"]
