@@ -12,6 +12,6 @@ export const a = 23
 export const getAllAirdrops = asyncHandler(
   async (req: Request, res: Response) => {
     const airdrops = await prisma.airdrops.findMany()
-    return airdrops
+    res.send(airdrops)
   },
 )
