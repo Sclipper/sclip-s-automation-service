@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "NODE_ENV=dev NODE_PATH=src nodemon index.ts",
-    "start:prod": "NODE_ENV=prod NODE_PATH=src nodemon index.ts",
+    "start:prod": "NODE_ENV=prod NODE_PATH=src pm2 start index.ts",
     "migrate:dev": "npx dotenv -e .env.dev -- prisma migrate dev",
     "db:push": "npx dotenv -e .env.dev -- prisma db push",
     "migrate:reset": "npx dotenv -e .env.dev -- prisma migrate reset",
